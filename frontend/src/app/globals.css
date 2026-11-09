@@ -211,6 +211,10 @@ body {
 input[type="date"] {
   position: relative;
   cursor: pointer;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
