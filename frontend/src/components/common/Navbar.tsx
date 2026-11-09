@@ -387,56 +387,31 @@ export default function Navbar() {
             )}
           </div>
 
-          {/* Mobile Right Controls */}
-          <div className="flex lg:hidden items-center gap-1.5 sm:gap-2">
-            {/* Quick Login Pill for Mobile (Visible right in the header!) */}
+          {/* Mobile Right Controls: Ultra-clean, non-cluttered */}
+          <div className="flex lg:hidden items-center gap-2 shrink-0">
+            {/* Direct Login Pill for Mobile (Never wraps onto two lines) */}
             {!isAuthenticated ? (
               <Link
                 href="/login"
-                className="px-2.5 sm:px-3 py-1.5 rounded-xl bg-gradient-to-r from-[#00D2FF] to-[#0284C7] text-white text-xs font-bold shadow-md shadow-[#00D2FF]/25 flex items-center gap-1 active:scale-95 transition-all"
+                className="px-3.5 py-1.5 rounded-full bg-gradient-to-r from-[#00D2FF] to-[#0284C7] text-white text-xs font-black whitespace-nowrap shadow-md shadow-[#00D2FF]/25 flex items-center gap-1.5 active:scale-95 transition-all shrink-0"
               >
-                <LogIn className="w-3.5 h-3.5" />
-                <span>{t.nav.login}</span>
+                <LogIn className="w-3.5 h-3.5 shrink-0" />
+                <span className="shrink-0">{t.nav.login}</span>
               </Link>
             ) : (
               <Link
                 href={dashboardLink}
-                className="p-1.5 sm:p-2 rounded-xl bg-slate-100 dark:bg-[#142A44] border border-slate-200 dark:border-[#1E3B60] text-[#00D2FF] flex items-center justify-center hover:border-[#00D2FF] transition-colors"
+                className="w-8 h-8 rounded-full bg-[#1E3B60] border border-[#00D2FF]/40 text-[#00D2FF] flex items-center justify-center font-bold text-xs shrink-0 shadow-sm"
                 title="Dashboard"
               >
-                <LayoutDashboard className="w-4 h-4" />
+                {user ? user.name.charAt(0).toUpperCase() : <UserIcon className="w-4 h-4" />}
               </Link>
             )}
-
-            {/* Theme Toggle */}
-            <button
-              onClick={toggleTheme}
-              className="p-1.5 sm:p-2 rounded-xl bg-slate-100 dark:bg-[#142A44] border border-slate-200 dark:border-[#1E3B60] text-slate-700 dark:text-slate-300 transition-colors"
-              title="Toggle Theme"
-              aria-label="Toggle Theme"
-            >
-              {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-[#142A44]" />}
-            </button>
-
-            {/* Language Switch */}
-            <button
-              onClick={() => {
-                const nextLang: Record<Language, Language> = { en: 'km', km: 'zh', zh: 'en' };
-                setLanguage(nextLang[language]);
-              }}
-              className="px-2 sm:px-2.5 py-1.5 rounded-xl bg-slate-100 dark:bg-[#142A44] border border-slate-200 dark:border-[#1E3B60] text-xs font-bold text-slate-700 dark:text-slate-200 flex items-center gap-1 transition-colors"
-              title="Switch Language"
-            >
-              <span className="w-4 h-3 rounded-xs overflow-hidden shrink-0 flex items-center justify-center border border-white/20">
-                {currentLang.flag}
-              </span>
-              <span className="text-[10px] font-bold">{currentLang.short}</span>
-            </button>
 
             {/* Hamburger Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-xl bg-slate-100 dark:bg-[#142A44] border border-slate-200 dark:border-[#1E3B60] text-slate-800 dark:text-white focus:outline-none transition-colors"
+              className="p-2 rounded-xl bg-slate-100 dark:bg-[#142A44] border border-slate-200 dark:border-[#1E3B60] text-slate-800 dark:text-white focus:outline-none transition-colors shrink-0"
               aria-label="Toggle mobile menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5 text-rose-500" /> : <Menu className="w-5 h-5" />}
@@ -445,9 +420,14 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Drawer Menu */}
+      {/* Mobile Drawer Menu & Overlay */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-slate-200 dark:border-[#1E3B60] bg-white dark:bg-[#081426] px-4 pt-4 pb-6 space-y-4 max-h-[85vh] overflow-y-auto animate-in slide-in-from-top-2 duration-200 shadow-2xl">
+        <>
+          <div 
+            className="fixed inset-0 top-[72px] bg-black/60 backdrop-blur-xs z-40 lg:hidden animate-in fade-in duration-200"
+            onClick={() => setMobileMenuOpen(false)}
+          />
+          <div className="fixed top-[72px] inset-x-0 z-50 lg:hidden border-b border-slate-200 dark:border-[#1E3B60] bg-white dark:bg-[#081426] px-4 pt-4 pb-6 space-y-4 max-h-[calc(100vh-76px)] overflow-y-auto animate-in slide-in-from-top-2 duration-200 shadow-2xl">
           
           {/* Top Auth Section: Prominent Mobile Login/Register or Profile Card */}
           {!isAuthenticated ? (
@@ -674,6 +654,7 @@ export default function Navbar() {
           </div>
 
         </div>
+        </>
       )}
     </header>
   );

@@ -99,25 +99,26 @@ export default function AIChatbot() {
 
   return (
     <>
-      {/* Floating Trigger Button */}
-      <div className="fixed bottom-6 right-6 z-40">
+      {/* Floating Trigger Button: Sleek & Compact so it NEVER blocks mobile inputs */}
+      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 pb-[env(safe-area-inset-bottom,0px)]">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="group relative flex items-center gap-2.5 px-5 py-3.5 rounded-full btn-glow text-white font-black text-sm shadow-2xl hover:scale-105 transition-all cursor-pointer"
+          className="group relative flex items-center justify-center w-11 h-11 sm:w-auto sm:px-5 sm:py-3.5 rounded-full btn-glow text-white font-black text-sm shadow-xl hover:scale-105 active:scale-95 transition-all cursor-pointer"
           aria-label={t.chatbot.launcher}
+          title={t.chatbot.launcher}
         >
-          <span className="relative flex h-3 w-3">
+          <span className="relative flex h-2.5 w-2.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-white"></span>
           </span>
-          <Sparkles className="w-5 h-5 text-[#DCEAF7]" />
-          <span className="hidden sm:inline">{t.chatbot.launcher}</span>
+          <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+          <span className="hidden md:inline font-bold text-xs">{t.chatbot.launcher}</span>
         </button>
       </div>
 
       {/* Expandable Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-24 right-4 sm:right-6 w-[94vw] sm:w-[420px] h-[580px] z-50 bg-white dark:bg-[#142A44] rounded-3xl shadow-2xl border border-slate-200/90 dark:border-[#1E3B60] flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-300">
+        <div className="fixed inset-x-3 bottom-3 sm:inset-auto sm:bottom-24 sm:right-6 sm:w-[420px] h-[520px] max-h-[82vh] z-50 bg-white dark:bg-[#142A44] rounded-3xl shadow-2xl border border-slate-200/90 dark:border-[#1E3B60] flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-300">
           
           {/* Header */}
           <div className="p-4 bg-slate-900 dark:bg-[#081426] text-white flex items-center justify-between border-b border-slate-800 dark:border-[#1E3B60]">

@@ -67,19 +67,19 @@ export default function SearchBox() {
         role="search"
         aria-label="Motorcycle Search Form"
       >
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 items-center">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 items-end">
           
-          {/* Province Dropdown */}
-          <div className="relative text-left">
+          {/* Province Dropdown: Full width on mobile (col-span-2), 1 col on desktop */}
+          <div className="col-span-2 lg:col-span-1 relative text-left">
             <label className="block text-[11px] font-black uppercase tracking-wider text-slate-700 dark:text-[#DCEAF7] mb-1.5 flex items-center gap-1.5">
-              <MapPin className="w-3.5 h-3.5 text-[#4A74A7]" />
+              <MapPin className="w-3.5 h-3.5 text-[#00D2FF]" />
               <span>{isKhmer ? 'ជ្រើសរើសខេត្ត' : 'Destination'}</span>
             </label>
             <div className="relative">
               <select
                 value={province}
                 onChange={(e) => setProvince(e.target.value)}
-                className="w-full pl-3.5 pr-8 py-3 rounded-2xl border border-slate-200 dark:border-[#1E3B60] bg-slate-50 dark:bg-[#081426] text-base sm:text-sm font-semibold text-slate-900 dark:text-white focus:outline-none focus:border-[#4A74A7] focus:ring-1 focus:ring-[#4A74A7] transition-colors cursor-pointer appearance-none"
+                className="w-full pl-3 pr-8 py-3 rounded-2xl border border-slate-200 dark:border-[#1E3B60] bg-slate-50 dark:bg-[#081426] text-sm font-semibold text-slate-900 dark:text-white focus:outline-none focus:border-[#00D2FF] focus:ring-1 focus:ring-[#00D2FF] transition-colors cursor-pointer appearance-none"
                 aria-label="Select Cambodian Province"
               >
                 <option value="">{isKhmer ? 'ខេត្តទាំង ២៥ (ទាំងអស់)' : 'All 25 Provinces'}</option>
@@ -97,11 +97,11 @@ export default function SearchBox() {
             </div>
           </div>
 
-          {/* Pickup Date */}
-          <div className="relative text-left">
-            <label className="block text-[11px] font-black uppercase tracking-wider text-slate-700 dark:text-white mb-1.5 flex items-center gap-1.5">
-              <Calendar className="w-3.5 h-3.5 text-[#00D2FF]" />
-              <span>{isKhmer ? 'ថ្ងៃទទួលម៉ូតូ' : 'Pick-up Date'}</span>
+          {/* Pickup Date: 1 Col (Half width on mobile) */}
+          <div className="col-span-1 relative text-left">
+            <label className="block text-[11px] font-black uppercase tracking-wider text-slate-700 dark:text-white mb-1.5 flex items-center gap-1.5 truncate">
+              <Calendar className="w-3.5 h-3.5 text-[#00D2FF] shrink-0" />
+              <span className="truncate">{isKhmer ? 'ថ្ងៃទទួល' : 'Pick-up'}</span>
             </label>
             <div className="relative">
               <input
@@ -110,17 +110,17 @@ export default function SearchBox() {
                 min={new Date().toISOString().split('T')[0]}
                 onClick={(e) => e.currentTarget.showPicker?.()}
                 onChange={(e) => setPickupDate(e.target.value)}
-                className="w-full pl-3.5 pr-4 py-3 rounded-2xl border border-slate-200 dark:border-[#1E3B60] bg-slate-50 dark:bg-[#081426] text-base sm:text-sm font-semibold text-slate-900 dark:text-white focus:outline-none focus:border-[#00D2FF] focus:ring-1 focus:ring-[#00D2FF] transition-colors cursor-pointer"
+                className="w-full px-3 py-3 rounded-2xl border border-slate-200 dark:border-[#1E3B60] bg-slate-50 dark:bg-[#081426] text-xs sm:text-sm font-semibold text-slate-900 dark:text-white focus:outline-none focus:border-[#00D2FF] focus:ring-1 focus:ring-[#00D2FF] transition-colors cursor-pointer"
                 aria-label="Pick up date"
               />
             </div>
           </div>
 
-          {/* Return Date */}
-          <div className="relative text-left">
-            <label className="block text-[11px] font-black uppercase tracking-wider text-slate-700 dark:text-white mb-1.5 flex items-center gap-1.5">
-              <Calendar className="w-3.5 h-3.5 text-[#00D2FF]" />
-              <span>{isKhmer ? 'ថ្ងៃប្រគល់ម៉ូតូ' : 'Return Date'}</span>
+          {/* Return Date: 1 Col (Half width on mobile) */}
+          <div className="col-span-1 relative text-left">
+            <label className="block text-[11px] font-black uppercase tracking-wider text-slate-700 dark:text-white mb-1.5 flex items-center gap-1.5 truncate">
+              <Calendar className="w-3.5 h-3.5 text-[#00D2FF] shrink-0" />
+              <span className="truncate">{isKhmer ? 'ថ្ងៃប្រគល់' : 'Return'}</span>
             </label>
             <div className="relative">
               <input
@@ -129,21 +129,21 @@ export default function SearchBox() {
                 min={pickupDate || new Date().toISOString().split('T')[0]}
                 onClick={(e) => e.currentTarget.showPicker?.()}
                 onChange={(e) => setReturnDate(e.target.value)}
-                className="w-full pl-3.5 pr-4 py-3 rounded-2xl border border-slate-200 dark:border-[#1E3B60] bg-slate-50 dark:bg-[#081426] text-base sm:text-sm font-semibold text-slate-900 dark:text-white focus:outline-none focus:border-[#00D2FF] focus:ring-1 focus:ring-[#00D2FF] transition-colors cursor-pointer"
+                className="w-full px-3 py-3 rounded-2xl border border-slate-200 dark:border-[#1E3B60] bg-slate-50 dark:bg-[#081426] text-xs sm:text-sm font-semibold text-slate-900 dark:text-white focus:outline-none focus:border-[#00D2FF] focus:ring-1 focus:ring-[#00D2FF] transition-colors cursor-pointer"
                 aria-label="Return date"
               />
             </div>
           </div>
 
-          {/* Search Button */}
-          <div className="pt-2 sm:pt-6">
+          {/* Search Button: Full width on mobile (col-span-2), 1 col on desktop */}
+          <div className="col-span-2 lg:col-span-1 pt-1 lg:pt-0">
             <Button
               type="submit"
               variant="primary"
               size="md"
               fullWidth
               leftIcon={<Search className="w-4 h-4" />}
-              className="py-3.5 shadow-lg shadow-[#4A74A7]/35 text-xs sm:text-sm"
+              className="py-3.5 shadow-lg shadow-[#00D2FF]/20 text-xs sm:text-sm font-black"
             >
               {isKhmer ? 'ស្វែងរកម៉ូតូ' : 'Search Motorcycles'}
             </Button>
