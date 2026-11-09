@@ -124,7 +124,7 @@ export default function SearchBar({
               min={new Date().toISOString().split('T')[0]}
               onClick={(e) => e.currentTarget.showPicker?.()}
               onChange={(e) => setStartDate(e.target.value)}
-              className="w-full bg-transparent text-slate-900 dark:text-white font-semibold text-sm focus:outline-none cursor-pointer dark:[color-scheme:dark] [color-scheme:light]"
+              className="w-full bg-transparent text-slate-900 dark:text-white font-semibold text-base sm:text-sm focus:outline-none cursor-pointer"
             />
           </div>
         </div>

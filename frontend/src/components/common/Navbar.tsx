@@ -18,7 +18,12 @@ import {
   Globe,
   User as UserIcon,
   Calendar,
-  Sparkles
+  Sparkles,
+  LogIn,
+  Home,
+  MapPin,
+  Phone,
+  Info
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useFavorites } from '../../context/FavoritesContext';
@@ -382,11 +387,30 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Right Controls */}
-          <div className="flex lg:hidden items-center gap-2">
+          <div className="flex lg:hidden items-center gap-1.5 sm:gap-2">
+            {/* Quick Login Pill for Mobile (Visible right in the header!) */}
+            {!isAuthenticated ? (
+              <Link
+                href="/login"
+                className="px-2.5 sm:px-3 py-1.5 rounded-xl bg-gradient-to-r from-[#00D2FF] to-[#0284C7] text-white text-xs font-bold shadow-md shadow-[#00D2FF]/25 flex items-center gap-1 active:scale-95 transition-all"
+              >
+                <LogIn className="w-3.5 h-3.5" />
+                <span>{t.nav.login}</span>
+              </Link>
+            ) : (
+              <Link
+                href={dashboardLink}
+                className="p-1.5 sm:p-2 rounded-xl bg-slate-100 dark:bg-[#142A44] border border-slate-200 dark:border-[#1E3B60] text-[#00D2FF] flex items-center justify-center hover:border-[#00D2FF] transition-colors"
+                title="Dashboard"
+              >
+                <LayoutDashboard className="w-4 h-4" />
+              </Link>
+            )}
+
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-xl bg-slate-100 dark:bg-[#142A44] border border-slate-200 dark:border-[#1E3B60] text-slate-700 dark:text-slate-300"
+              className="p-1.5 sm:p-2 rounded-xl bg-slate-100 dark:bg-[#142A44] border border-slate-200 dark:border-[#1E3B60] text-slate-700 dark:text-slate-300 transition-colors"
               title="Toggle Theme"
               aria-label="Toggle Theme"
             >
@@ -399,18 +423,22 @@ export default function Navbar() {
                 const nextLang: Record<Language, Language> = { en: 'km', km: 'zh', zh: 'en' };
                 setLanguage(nextLang[language]);
               }}
-              className="px-2.5 py-1.5 rounded-xl bg-slate-100 dark:bg-[#142A44] border border-slate-200 dark:border-[#1E3B60] text-xs font-bold text-slate-700 dark:text-slate-200 flex items-center gap-1"
+              className="px-2 sm:px-2.5 py-1.5 rounded-xl bg-slate-100 dark:bg-[#142A44] border border-slate-200 dark:border-[#1E3B60] text-xs font-bold text-slate-700 dark:text-slate-200 flex items-center gap-1 transition-colors"
+              title="Switch Language"
             >
-              <span>{currentLang.flag}</span>
-              <span className="text-[10px]">{currentLang.short}</span>
+              <span className="w-4 h-3 rounded-xs overflow-hidden shrink-0 flex items-center justify-center border border-white/20">
+                {currentLang.flag}
+              </span>
+              <span className="text-[10px] font-bold">{currentLang.short}</span>
             </button>
 
             {/* Hamburger Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-xl bg-slate-100 dark:bg-[#142A44] border border-slate-200 dark:border-[#1E3B60] text-slate-800 dark:text-white focus:outline-none"
+              className="p-2 rounded-xl bg-slate-100 dark:bg-[#142A44] border border-slate-200 dark:border-[#1E3B60] text-slate-800 dark:text-white focus:outline-none transition-colors"
+              aria-label="Toggle mobile menu"
             >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileMenuOpen ? <X className="w-5 h-5 text-rose-500" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
@@ -418,50 +446,174 @@ export default function Navbar() {
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-slate-200 dark:border-[#1E3B60] bg-white dark:bg-[#081426] px-4 pt-3 pb-6 space-y-4 animate-in slide-in-from-top-2 duration-200">
+        <div className="lg:hidden border-t border-slate-200 dark:border-[#1E3B60] bg-white dark:bg-[#081426] px-4 pt-4 pb-6 space-y-4 max-h-[85vh] overflow-y-auto animate-in slide-in-from-top-2 duration-200 shadow-2xl">
+          
+          {/* Top Auth Section: Prominent Mobile Login/Register or Profile Card */}
+          {!isAuthenticated ? (
+            <div className="p-4 rounded-2xl bg-gradient-to-br from-slate-50 to-slate-100 dark:from-[#0E2038] dark:to-[#142A44] border border-slate-200 dark:border-[#1E3B60] shadow-sm">
+              <div className="flex items-center gap-2.5 mb-3">
+                <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#00D2FF] to-[#0284C7] flex items-center justify-center text-white shadow-md shadow-sky-500/25">
+                  <Bike className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-black text-slate-900 dark:text-white">
+                    {language === 'km' ? 'សូមស្វាគមន៍មកកាន់ MothoRent' : 'Welcome to MothoRent'}
+                  </h4>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                    {language === 'km' ? 'ជួលម៉ូតូគ្រប់ខេត្តក្រុង ងាយស្រួល និងរហ័ស' : 'Explore Cambodia on Two Wheels'}
+                  </p>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <Link
+                  href="/login"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full py-2.5 px-3 rounded-xl bg-white dark:bg-[#081426] border border-slate-200 dark:border-[#1E3B60] text-slate-800 dark:text-white hover:text-[#00D2FF] font-bold text-xs flex items-center justify-center gap-1.5 shadow-xs transition-colors"
+                >
+                  <LogIn className="w-3.5 h-3.5 text-[#00D2FF]" />
+                  <span>{t.nav.login}</span>
+                </Link>
+                <Link
+                  href="/register"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full py-2.5 px-3 rounded-xl btn-glow text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-md transition-transform"
+                >
+                  <Sparkles className="w-3.5 h-3.5 text-white" />
+                  <span>{t.nav.register}</span>
+                </Link>
+              </div>
+            </div>
+          ) : (
+            user && (
+              <div className="p-4 rounded-2xl bg-gradient-to-br from-slate-50 to-slate-100 dark:from-[#0E2038] dark:to-[#142A44] border border-slate-200 dark:border-[#1E3B60] shadow-sm">
+                <div className="flex items-center justify-between gap-3 mb-3">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#4A74A7] to-[#6A95CA] flex items-center justify-center font-black text-white text-sm shadow-md">
+                      {user.name.charAt(0).toUpperCase()}
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold text-slate-900 dark:text-white leading-tight">{user.name}</p>
+                      <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-tight">{user.email}</p>
+                    </div>
+                  </div>
+                  <span className="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-[#00D2FF]/20 text-[#00D2FF] border border-[#00D2FF]/40">
+                    {role}
+                  </span>
+                </div>
+                <div className="flex items-center gap-2 pt-2 border-t border-slate-200/80 dark:border-[#1E3B60]">
+                  <Link
+                    href={dashboardLink}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex-1 py-2 px-3 rounded-xl bg-[#00D2FF]/15 text-[#00D2FF] hover:bg-[#00D2FF]/25 font-bold text-xs flex items-center justify-center gap-1.5 transition-colors"
+                  >
+                    <LayoutDashboard className="w-3.5 h-3.5" />
+                    <span>{role === 'admin' ? t.nav.adminPanel : role === 'owner' ? t.nav.ownerPortal : t.nav.dashboard}</span>
+                  </Link>
+                  <button
+                    onClick={() => { switchRole(); setMobileMenuOpen(false); }}
+                    className="py-2 px-2.5 rounded-xl bg-slate-200 dark:bg-[#1E3B60] text-slate-700 dark:text-slate-200 hover:text-white font-bold text-xs transition-colors"
+                    title="Switch Role"
+                  >
+                    🔄
+                  </button>
+                  <button
+                    onClick={() => { logout(); setMobileMenuOpen(false); }}
+                    className="py-2 px-2.5 rounded-xl bg-rose-500/10 text-rose-500 hover:bg-rose-500/20 font-bold text-xs transition-colors"
+                    title={t.nav.logout}
+                  >
+                    <LogOut className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            )
+          )}
+
+          {/* Navigation Links with Icons */}
           <nav className="flex flex-col space-y-1 text-sm font-medium">
             <Link 
               href="/" 
               onClick={() => setMobileMenuOpen(false)}
-              className="px-3 py-2 rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#142A44]"
+              className={`px-3.5 py-2.5 rounded-xl flex items-center gap-2.5 transition-colors ${
+                isActive('/') 
+                  ? 'bg-slate-100 dark:bg-[#1E3B60] text-[#00D2FF] font-bold' 
+                  : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#142A44]'
+              }`}
             >
-              {t.nav.home}
+              <Home className="w-4 h-4" />
+              <span>{t.nav.home}</span>
             </Link>
+
             <Link 
               href="/motorcycles" 
               onClick={() => setMobileMenuOpen(false)}
-              className="px-3 py-2 rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#142A44]"
+              className={`px-3.5 py-2.5 rounded-xl flex items-center gap-2.5 transition-colors ${
+                isActive('/motorcycles') 
+                  ? 'bg-slate-100 dark:bg-[#1E3B60] text-[#00D2FF] font-bold' 
+                  : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#142A44]'
+              }`}
             >
-              {t.nav.browse}
+              <Bike className="w-4 h-4" />
+              <span>{t.nav.browse}</span>
             </Link>
+
             <Link 
               href="/search" 
               onClick={() => setMobileMenuOpen(false)}
-              className="px-3 py-2 rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#142A44]"
+              className={`px-3.5 py-2.5 rounded-xl flex items-center gap-2.5 transition-colors ${
+                isActive('/search') 
+                  ? 'bg-slate-100 dark:bg-[#1E3B60] text-[#00D2FF] font-bold' 
+                  : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#142A44]'
+              }`}
             >
-              {t.nav.map}
+              <MapPin className="w-4 h-4" />
+              <span>{t.nav.map}</span>
             </Link>
+
+            {/* Mobile Favorites Link */}
             <Link 
-              href={dashboardLink} 
+              href="/dashboard/favorites" 
               onClick={() => setMobileMenuOpen(false)}
-              className="px-3 py-2 rounded-xl text-[#4A74A7] dark:text-[#DCEAF7] bg-slate-100 dark:bg-[#142A44] font-bold flex items-center gap-2"
+              className={`px-3.5 py-2.5 rounded-xl flex items-center justify-between transition-colors ${
+                isActive('/dashboard/favorites') 
+                  ? 'bg-slate-100 dark:bg-[#1E3B60] text-[#00D2FF] font-bold' 
+                  : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#142A44]'
+              }`}
             >
-              <LayoutDashboard className="w-4 h-4" />
-              <span>{role === 'admin' ? t.nav.adminPanel : role === 'owner' ? t.nav.ownerPortal : t.nav.dashboard}</span>
+              <div className="flex items-center gap-2.5">
+                <Heart className="w-4 h-4 text-rose-500 fill-rose-500" />
+                <span>{language === 'km' ? 'ម៉ូតូពេញចិត្ត' : 'Saved Favorites'}</span>
+              </div>
+              {favorites.length > 0 && (
+                <span className="px-2 py-0.5 rounded-full text-xs font-black bg-rose-500 text-white">
+                  {favorites.length}
+                </span>
+              )}
             </Link>
+
             <Link 
               href="/about" 
               onClick={() => setMobileMenuOpen(false)}
-              className="px-3 py-2 rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#142A44]"
+              className={`px-3.5 py-2.5 rounded-xl flex items-center gap-2.5 transition-colors ${
+                isActive('/about') 
+                  ? 'bg-slate-100 dark:bg-[#1E3B60] text-[#00D2FF] font-bold' 
+                  : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#142A44]'
+              }`}
             >
-              {t.nav.about}
+              <Info className="w-4 h-4" />
+              <span>{t.nav.about}</span>
             </Link>
+
             <Link 
               href="/contact" 
               onClick={() => setMobileMenuOpen(false)}
-              className="px-3 py-2 rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#142A44]"
+              className={`px-3.5 py-2.5 rounded-xl flex items-center gap-2.5 transition-colors ${
+                isActive('/contact') 
+                  ? 'bg-slate-100 dark:bg-[#1E3B60] text-[#00D2FF] font-bold' 
+                  : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#142A44]'
+              }`}
             >
-              {t.nav.contact}
+              <Phone className="w-4 h-4" />
+              <span>{t.nav.contact}</span>
             </Link>
           </nav>
 
@@ -486,21 +638,21 @@ export default function Navbar() {
             </button>
           </div>
 
-          {/* Mobile Languages Selector */}
-          <div className="pt-2 border-t border-slate-200 dark:border-[#1E3B60] flex items-center justify-between">
-            <span className="text-xs text-slate-500 dark:text-slate-400 font-semibold">Language:</span>
-            <div className="flex gap-1.5">
+          {/* Mobile Languages Selector with Flags */}
+          <div className="pt-2 border-t border-slate-200 dark:border-[#1E3B60] space-y-2">
+            <span className="text-xs text-slate-500 dark:text-slate-400 font-semibold block">Language:</span>
+            <div className="grid grid-cols-3 gap-2">
               {languageOptions.map(l => (
                 <button
                   key={l.code}
                   onClick={() => setLanguage(l.code)}
-                  className={`px-2.5 py-1.5 text-xs rounded-xl flex items-center gap-1.5 transition-colors cursor-pointer ${
+                  className={`py-2 px-2 text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
                     language === l.code 
                       ? 'bg-[#00D2FF] text-[#081426] font-black shadow-sm' 
                       : 'bg-slate-100 dark:bg-[#142A44] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-[#1E3B60]'
                   }`}
                 >
-                  <span className="w-3.5 h-3.5 rounded-full overflow-hidden shadow-xs shrink-0 flex items-center justify-center border border-white/20">
+                  <span className="w-4 h-3 rounded-xs overflow-hidden shadow-xs shrink-0 flex items-center justify-center border border-white/20">
                     {l.flag}
                   </span>
                   <span className="font-bold">{l.short}</span>
@@ -509,26 +661,13 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Mobile User Profile Info */}
-          {isAuthenticated && user && (
-            <div className="pt-3 border-t border-slate-200 dark:border-[#1E3B60] flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-[#4A74A7] flex items-center justify-center font-bold text-white text-xs">
-                  {user.name.charAt(0)}
-                </div>
-                <div>
-                  <p className="text-xs font-bold text-slate-900 dark:text-white">{user.name}</p>
-                  <p className="text-[10px] text-slate-500 dark:text-slate-400">{user.email}</p>
-                </div>
-              </div>
-              <button
-                onClick={logout}
-                className="text-xs text-rose-500 font-bold hover:underline"
-              >
-                {t.nav.logout}
-              </button>
-            </div>
-          )}
+          {/* Quick Hotline Footer */}
+          <div className="pt-3 border-t border-slate-200 dark:border-[#1E3B60] text-center">
+            <p className="text-[11px] text-slate-400 dark:text-slate-500 font-medium">
+              📞 24/7 Hotline: <a href="tel:+85512345678" className="text-[#00D2FF] font-bold hover:underline">+855 12 345 678</a>
+            </p>
+          </div>
+
         </div>
       )}
     </header>

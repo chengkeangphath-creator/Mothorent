@@ -88,18 +88,18 @@ function LoginFormContent() {
       {/* Top Left: Back to Home Link */}
       <Link
         href="/"
-        className="absolute top-6 left-6 z-30 flex items-center gap-2 px-4 py-2 rounded-2xl bg-white/80 dark:bg-[#142A44]/80 hover:bg-white dark:hover:bg-[#1E3B60] backdrop-blur-md border border-slate-200/80 dark:border-slate-700/80 text-xs font-bold text-slate-700 dark:text-slate-200 hover:text-[#00D2FF] dark:hover:text-[#00D2FF] transition-all shadow-md group cursor-pointer"
+        className="absolute top-4 left-4 sm:top-6 sm:left-6 z-30 flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-2xl bg-white/80 dark:bg-[#142A44]/80 hover:bg-white dark:hover:bg-[#1E3B60] backdrop-blur-md border border-slate-200/80 dark:border-slate-700/80 text-xs font-bold text-slate-700 dark:text-slate-200 hover:text-[#00D2FF] dark:hover:text-[#00D2FF] transition-all shadow-md group cursor-pointer"
       >
         <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
         <span>{isKhmer ? 'ត្រឡប់ទៅទំព័រដើម' : 'Back to Home'}</span>
       </Link>
 
       {/* Top Right: Theme & Language Quick Switcher */}
-      <div className="absolute top-6 right-6 z-30 flex items-center gap-2">
+      <div className="absolute top-4 right-4 sm:top-6 sm:right-6 z-30 flex items-center gap-1.5 sm:gap-2">
         <div className="flex bg-white/80 dark:bg-[#142A44]/80 backdrop-blur-md rounded-2xl border border-slate-200/80 dark:border-slate-700/80 p-1 shadow-md text-xs">
           <button
             onClick={() => setLanguage('en')}
-            className={`px-2.5 py-1 rounded-xl text-[11px] font-bold transition-colors cursor-pointer ${
+            className={`px-2 sm:px-2.5 py-1 rounded-xl text-[11px] font-bold transition-colors cursor-pointer ${
               language === 'en' ? 'bg-[#00D2FF] text-[#081426]' : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
@@ -107,7 +107,7 @@ function LoginFormContent() {
           </button>
           <button
             onClick={() => setLanguage('km')}
-            className={`px-2.5 py-1 rounded-xl text-[11px] font-bold transition-colors cursor-pointer ${
+            className={`px-2 sm:px-2.5 py-1 rounded-xl text-[11px] font-bold transition-colors cursor-pointer ${
               language === 'km' ? 'bg-[#00D2FF] text-[#081426]' : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
@@ -117,14 +117,14 @@ function LoginFormContent() {
 
         <button
           onClick={toggleTheme}
-          className="p-2 rounded-2xl bg-white/80 dark:bg-[#142A44]/80 hover:bg-white dark:hover:bg-[#1E3B60] backdrop-blur-md border border-slate-200/80 dark:border-slate-700/80 text-slate-700 dark:text-slate-200 transition-all shadow-md cursor-pointer"
+          className="p-1.5 sm:p-2 rounded-2xl bg-white/80 dark:bg-[#142A44]/80 hover:bg-white dark:hover:bg-[#1E3B60] backdrop-blur-md border border-slate-200/80 dark:border-slate-700/80 text-slate-700 dark:text-slate-200 transition-all shadow-md cursor-pointer"
           title={theme === 'dark' ? "Switch to Light Mode" : "Switch to Dark Mode"}
         >
           {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-[#142A44]" />}
         </button>
       </div>
 
-      {/* Background Decorative Accents matching the reference design */}
+      {/* Background Decorative Accents */}
       <div className="absolute top-10 right-12 w-28 h-28 hidden lg:block opacity-35 pointer-events-none">
         <svg viewBox="0 0 100 100" fill="none" className="w-full h-full stroke-slate-400">
           <line x1="10" y1="0" x2="100" y2="90" strokeWidth="2" strokeDasharray="4 4" />
@@ -139,10 +139,10 @@ function LoginFormContent() {
       </div>
 
       {/* Main Centered Floating Card */}
-      <div className="w-full max-w-5xl bg-white dark:bg-navy rounded-[36px] shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-12 border border-slate-200/80 dark:border-navy-light/60 relative z-10 my-12 lg:my-0">
+      <div className="w-full max-w-5xl bg-white dark:bg-navy rounded-[36px] shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-12 border border-slate-200/80 dark:border-navy-light/60 relative z-10 mt-14 sm:mt-16 lg:mt-0 my-4 sm:my-8 lg:my-0">
         
-        {/* Left Column (50% on Desktop / 6 Cols): Full-Bleed Epic Motorcycle Image Showcase */}
-        <div className="lg:col-span-6 relative min-h-[620px] lg:min-h-[720px] p-8 sm:p-12 flex flex-col justify-between overflow-hidden text-white group">
+        {/* Left Column (50% on Desktop / 6 Cols): Full-Bleed Epic Motorcycle Image Showcase (Hidden on Mobile for Instant Form Access) */}
+        <div className="hidden lg:flex lg:col-span-6 relative min-h-[720px] p-8 sm:p-12 flex-col justify-between overflow-hidden text-white group">
           
           {/* Full-Bleed Motorcycle Background Image */}
           <img
@@ -245,30 +245,30 @@ function LoginFormContent() {
 
         </div>
 
-        {/* Right Column (50% on Desktop / 6 Cols): Clean Minimal Form matching Reference */}
-        <div className="lg:col-span-6 bg-white dark:bg-navy p-8 sm:p-12 lg:p-14 flex flex-col justify-center space-y-6">
+        {/* Right Column (50% on Desktop / 6 Cols): Clean Minimal Form */}
+        <div className="lg:col-span-6 bg-white dark:bg-navy p-6 sm:p-10 lg:p-14 flex flex-col justify-center space-y-6">
           
           {/* Brand Logo Header */}
           <div className="text-center space-y-2">
             <Link href="/" className="inline-flex items-center gap-2 group">
-              <div className="w-8 h-8 rounded-xl bg-brand-orange text-white flex items-center justify-center shadow-md shadow-brand-orange/30">
-                <Bike className="w-4 h-4" />
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#00D2FF] to-[#0284C7] text-white flex items-center justify-center shadow-md shadow-[#00D2FF]/25">
+                <Bike className="w-5 h-5" />
               </div>
               <span className="text-xl font-black tracking-tight text-slate-900 dark:text-white">
-                Motho<span className="text-brand-orange">Rent</span>
+                Motho<span className="text-[#00D2FF]">Rent</span>
               </span>
             </Link>
 
-            {/* Greeting Headline: "Hai, selamat datang kembali" */}
+            {/* Greeting Headline */}
             <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight pt-1">
-              {isKhmer ? 'សួស្តី សូមស្វាគមន៍មកវិញ!' : 'Hai, welcome back!'}
+              {isKhmer ? 'សួស្តី សូមស្វាគមន៍មកវិញ!' : 'Welcome back!'}
             </h1>
             
-            {/* Subtitle: "Baru di myEdlinks? Daftar Gratis" */}
+            {/* Subtitle */}
             <p className="text-xs text-slate-500 dark:text-slate-400">
               {isKhmer ? 'ទើបតែមកកាន់ Motho Rent មែនទេ? ' : 'New to Motho Rent? '}
-              <Link href="/register" className="text-brand-orange font-bold hover:underline">
-                {isKhmer ? 'ចុះឈ្មោះឥតគិតថ្លៃ (Daftar Gratis)' : 'Sign Up Free'}
+              <Link href="/register" className="text-[#00D2FF] font-bold hover:underline">
+                {isKhmer ? 'ចុះឈ្មោះឥតគិតថ្លៃ' : 'Sign Up Free'}
               </Link>
             </p>
           </div>
@@ -291,27 +291,27 @@ function LoginFormContent() {
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-3.5">
             
-            {/* Email Field: "Contoh: email@example.com" */}
+            {/* Email Field */}
             <div>
               <input
                 type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Contoh: email@example.com"
-                className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-navy-light bg-white dark:bg-navy-dark text-xs sm:text-sm text-slate-800 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange transition-all"
+                placeholder={isKhmer ? 'អ៊ីមែល: yourname@example.com' : 'Email: yourname@example.com'}
+                className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-navy-light bg-white dark:bg-navy-dark text-base sm:text-sm text-slate-800 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-[#00D2FF] focus:ring-1 focus:ring-[#00D2FF] transition-all"
               />
             </div>
 
-            {/* Password Field: "Masukkan kata sandi kamu" with Eye toggle */}
+            {/* Password Field with Eye toggle */}
             <div className="relative">
               <input
                 type={showPassword ? 'text' : 'password'}
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder={isKhmer ? 'បញ្ចូលលេខសម្ងាត់របស់អ្នក' : 'Masukkan kata sandi kamu'}
-                className="w-full pl-4 pr-11 py-3 rounded-xl border border-slate-200 dark:border-navy-light bg-white dark:bg-navy-dark text-xs sm:text-sm text-slate-800 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange transition-all"
+                placeholder={isKhmer ? 'បញ្ចូលលេខសម្ងាត់របស់អ្នក' : 'Enter your password'}
+                className="w-full pl-4 pr-11 py-3 rounded-xl border border-slate-200 dark:border-navy-light bg-white dark:bg-navy-dark text-base sm:text-sm text-slate-800 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-[#00D2FF] focus:ring-1 focus:ring-[#00D2FF] transition-all"
               />
               <button
                 type="button"
@@ -323,30 +323,30 @@ function LoginFormContent() {
               </button>
             </div>
 
-            {/* Primary Blue CTA Button: "Masuk" */}
+            {/* Primary CTA Button */}
             <button
               type="submit"
               disabled={isLoading}
               className="w-full py-3.5 px-4 rounded-xl btn-glow disabled:opacity-50 text-white font-black text-sm shadow-xl transition-all flex items-center justify-center cursor-pointer active:scale-[0.99]"
             >
-              <span>{isLoading ? (isKhmer ? 'កំពុងចូល...' : 'Signing in...') : (isKhmer ? 'ចូលគណនី (Masuk)' : 'Masuk / Sign In')}</span>
+              <span>{isLoading ? (isKhmer ? 'កំពុងចូល...' : 'Signing in...') : (isKhmer ? 'ចូលគណនី' : 'Sign In')}</span>
             </button>
 
-            {/* Forgot Password Right-Aligned Link: "Lupa kata sandi?" */}
+            {/* Forgot Password Link */}
             <div className="text-right pt-0.5">
               <button
                 type="button"
                 onClick={() => setForgotSent(true)}
-                className="text-xs font-semibold text-[#4A74A7] hover:underline cursor-pointer"
+                className="text-xs font-semibold text-[#00D2FF] hover:underline cursor-pointer"
               >
-                {isKhmer ? 'ភ្លេចលេខសម្ងាត់? (Lupa kata sandi?)' : 'Lupa kata sandi?'}
+                {isKhmer ? 'ភ្លេចលេខសម្ងាត់?' : 'Forgot password?'}
               </button>
             </div>
 
-            {/* Social Divider: "Atau masuk menggunakan" */}
+            {/* Social Divider */}
             <div className="pt-2 text-center">
               <p className="text-xs text-slate-400 font-medium">
-                {isKhmer ? 'ឬចូលគណនីតាមរយៈ (Atau masuk menggunakan)' : 'Atau masuk menggunakan'}
+                {isKhmer ? 'ឬចូលគណនីតាមរយៈ' : 'Or continue with'}
               </p>
             </div>
 
@@ -392,28 +392,28 @@ function LoginFormContent() {
               </button>
             </div>
 
-            {/* Checkbox: "Ingat perangkat ini" */}
+            {/* Checkbox: Remember device */}
             <div className="pt-2">
               <label className="flex items-center gap-2 cursor-pointer text-xs text-slate-600 dark:text-slate-400">
                 <input
                   type="checkbox"
                   checked={rememberMe}
                   onChange={(e) => setRememberMe(e.target.checked)}
-                  className="rounded text-[#1877F2] focus:ring-[#1877F2] cursor-pointer"
+                  className="rounded text-[#00D2FF] focus:ring-[#00D2FF] cursor-pointer"
                 />
-                <span>{isKhmer ? 'ចងចាំឧបករណ៍នេះ (Ingat perangkat ini)' : 'Ingat perangkat ini (Remember this device)'}</span>
+                <span>{isKhmer ? 'ចងចាំឧបករណ៍នេះ' : 'Remember this device'}</span>
               </label>
             </div>
 
-            {/* Bottom Disclaimer matching Reference */}
+            {/* Bottom Disclaimer */}
             <p className="text-[11px] text-slate-400 text-left pt-2 leading-relaxed">
               {isKhmer ? (
                 <>
-                  ដោយបន្ត អ្នកយល់ព្រមតាម <Link href="/about" className="text-[#1877F2] font-semibold hover:underline">ល័ក្ខខ័ណ្ឌនៃការប្រើប្រាស់ (Syarat Penggunaan)</Link> និង <Link href="/about" className="text-[#1877F2] font-semibold hover:underline">គោលការណ៍ភាពឯកជន (Kebijakan Privasi)</Link> របស់យើង។
+                  ដោយបន្ត អ្នកយល់ព្រមតាម <Link href="/about" className="text-[#00D2FF] font-semibold hover:underline">ល័ក្ខខ័ណ្ឌនៃការប្រើប្រាស់</Link> និង <Link href="/about" className="text-[#00D2FF] font-semibold hover:underline">គោលការណ៍ភាពឯកជន</Link> របស់យើង។
                 </>
               ) : (
                 <>
-                  Dengan melanjutkan, kamu menerima <Link href="/about" className="text-[#1877F2] font-semibold hover:underline">Syarat Penggunaan</Link> dan <Link href="/about" className="text-[#1877F2] font-semibold hover:underline">Kebijakan Privasi</Link> kami.
+                  By continuing, you agree to our <Link href="/about" className="text-[#00D2FF] font-semibold hover:underline">Terms of Use</Link> and <Link href="/about" className="text-[#00D2FF] font-semibold hover:underline">Privacy Policy</Link>.
                 </>
               )}
             </p>

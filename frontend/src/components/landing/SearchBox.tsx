@@ -79,7 +79,7 @@ export default function SearchBox() {
               <select
                 value={province}
                 onChange={(e) => setProvince(e.target.value)}
-                className="w-full pl-3.5 pr-8 py-3 rounded-2xl border border-slate-200 dark:border-[#1E3B60] bg-slate-50 dark:bg-[#081426] text-xs sm:text-sm font-semibold text-slate-900 dark:text-white focus:outline-none focus:border-[#4A74A7] focus:ring-1 focus:ring-[#4A74A7] transition-colors cursor-pointer appearance-none"
+                className="w-full pl-3.5 pr-8 py-3 rounded-2xl border border-slate-200 dark:border-[#1E3B60] bg-slate-50 dark:bg-[#081426] text-base sm:text-sm font-semibold text-slate-900 dark:text-white focus:outline-none focus:border-[#4A74A7] focus:ring-1 focus:ring-[#4A74A7] transition-colors cursor-pointer appearance-none"
                 aria-label="Select Cambodian Province"
               >
                 <option value="">{isKhmer ? 'ខេត្តទាំង ២៥ (ទាំងអស់)' : 'All 25 Provinces'}</option>
@@ -100,44 +100,38 @@ export default function SearchBox() {
           {/* Pickup Date */}
           <div className="relative text-left">
             <label className="block text-[11px] font-black uppercase tracking-wider text-slate-700 dark:text-white mb-1.5 flex items-center gap-1.5">
-              <Calendar className="w-3.5 h-3.5 text-white" />
+              <Calendar className="w-3.5 h-3.5 text-[#00D2FF]" />
               <span>{isKhmer ? 'ថ្ងៃទទួលម៉ូតូ' : 'Pick-up Date'}</span>
             </label>
-            <div className="relative group">
+            <div className="relative">
               <input
                 type="date"
                 value={pickupDate}
                 min={new Date().toISOString().split('T')[0]}
                 onClick={(e) => e.currentTarget.showPicker?.()}
                 onChange={(e) => setPickupDate(e.target.value)}
-                className="w-full pl-3.5 pr-10 py-3 rounded-2xl border border-slate-200 dark:border-[#1E3B60] bg-slate-50 dark:bg-[#081426] text-xs sm:text-sm font-semibold text-slate-900 dark:text-white focus:outline-none focus:border-[#00D2FF] focus:ring-1 focus:ring-[#00D2FF] transition-colors cursor-pointer dark:[color-scheme:dark]"
+                className="w-full pl-3.5 pr-4 py-3 rounded-2xl border border-slate-200 dark:border-[#1E3B60] bg-slate-50 dark:bg-[#081426] text-base sm:text-sm font-semibold text-slate-900 dark:text-white focus:outline-none focus:border-[#00D2FF] focus:ring-1 focus:ring-[#00D2FF] transition-colors cursor-pointer"
                 aria-label="Pick up date"
               />
-              <div className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 flex items-center text-slate-400 dark:text-white group-hover:scale-110 transition-transform">
-                <Calendar className="w-4 h-4 text-slate-600 dark:text-white" />
-              </div>
             </div>
           </div>
 
           {/* Return Date */}
           <div className="relative text-left">
             <label className="block text-[11px] font-black uppercase tracking-wider text-slate-700 dark:text-white mb-1.5 flex items-center gap-1.5">
-              <Calendar className="w-3.5 h-3.5 text-white" />
+              <Calendar className="w-3.5 h-3.5 text-[#00D2FF]" />
               <span>{isKhmer ? 'ថ្ងៃប្រគល់ម៉ូតូ' : 'Return Date'}</span>
             </label>
-            <div className="relative group">
+            <div className="relative">
               <input
                 type="date"
                 value={returnDate}
                 min={pickupDate || new Date().toISOString().split('T')[0]}
                 onClick={(e) => e.currentTarget.showPicker?.()}
                 onChange={(e) => setReturnDate(e.target.value)}
-                className="w-full pl-3.5 pr-10 py-3 rounded-2xl border border-slate-200 dark:border-[#1E3B60] bg-slate-50 dark:bg-[#081426] text-xs sm:text-sm font-semibold text-slate-900 dark:text-white focus:outline-none focus:border-[#00D2FF] focus:ring-1 focus:ring-[#00D2FF] transition-colors cursor-pointer dark:[color-scheme:dark]"
+                className="w-full pl-3.5 pr-4 py-3 rounded-2xl border border-slate-200 dark:border-[#1E3B60] bg-slate-50 dark:bg-[#081426] text-base sm:text-sm font-semibold text-slate-900 dark:text-white focus:outline-none focus:border-[#00D2FF] focus:ring-1 focus:ring-[#00D2FF] transition-colors cursor-pointer"
                 aria-label="Return date"
               />
-              <div className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 flex items-center text-slate-400 dark:text-white group-hover:scale-110 transition-transform">
-                <Calendar className="w-4 h-4 text-slate-600 dark:text-white" />
-              </div>
             </div>
           </div>
 
