@@ -30,6 +30,7 @@ import { useFavorites } from '../../context/FavoritesContext';
 import { useLanguage } from '../../context/LanguageContext';
 import { useTheme } from '../../context/ThemeContext';
 import { Language } from '../../i18n/translations';
+import { UserRole } from '../../types';
 
 function FlagUK() {
   return (
@@ -510,7 +511,11 @@ export default function Navbar() {
                     <span>{role === 'admin' ? t.nav.adminPanel : role === 'owner' ? t.nav.ownerPortal : t.nav.dashboard}</span>
                   </Link>
                   <button
-                    onClick={() => { switchRole(); setMobileMenuOpen(false); }}
+                    onClick={() => {
+                      const nextRole: UserRole = role === 'owner' ? 'customer' : 'owner';
+                      switchRole(nextRole);
+                      setMobileMenuOpen(false);
+                    }}
                     className="py-2 px-2.5 rounded-xl bg-slate-200 dark:bg-[#1E3B60] text-slate-700 dark:text-slate-200 hover:text-white font-bold text-xs transition-colors"
                     title="Switch Role"
                   >
