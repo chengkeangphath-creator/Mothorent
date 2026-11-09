@@ -1,0 +1,231 @@
+@import "tailwindcss";
+
+@theme {
+  /* ====================================================================
+     Farnegar Dark Blue Palette
+     #DCEAF7 (Ice Mist Blue Highlight)
+     #4A74A7 (Royal / Slate Blue Accent)
+     #142A44 (Deep Midnight Navy Blue)
+     #081426 (Obsidian Dark Navy Base)
+     ==================================================================== */
+
+  /* Navy Shades */
+  --color-navy: #142A44;
+  --color-navy-dark: #081426;
+  --color-navy-light: #1E3B60;
+  --color-navy-surface: #244670;
+
+  /* Ice Blue Shades */
+  --color-ice-blue: #DCEAF7;
+  --color-ice-blue-light: #F0F6FC;
+  --color-ice-blue-dark: #B9D5EE;
+
+  /* Accent Blue Shades */
+  --color-brand-blue: #0284C7;
+  --color-brand-blue-hover: #0369A1;
+  --color-brand-blue-light: #38BDF8;
+  --color-brand-blue-dark: #075985;
+
+  /* Brand Primary tokens */
+  --color-brand-primary: #0284C7;
+  --color-brand-primary-hover: #0369A1;
+
+  /* Electric Cyan / Sky Blue Glow Palette */
+  --color-electric-cyan: #00D2FF;
+  --color-electric-sky: #0EA5E9;
+  --color-electric-blue: #0284C7;
+
+  /* Universal mapping of orange-* across the entire site to the Electric Sky Blue & Dark Blue palette */
+  --color-orange-50: #142A44;
+  --color-orange-100: #1E3B60;   /* Dark Blue Badges & Icon Backdrops */
+  --color-orange-200: #244670;
+  --color-orange-300: #0369A1;
+  --color-orange-400: #38BDF8;   /* Light Sky Blue Highlight */
+  --color-orange-500: #0284C7;   /* Primary Interactive Elements & Glowing Buttons */
+  --color-orange-600: #0369A1;   /* Hover State */
+  --color-orange-700: #075985;
+  --color-orange-800: #0C4A6E;
+  --color-orange-900: #142A44;   /* Deep Navy */
+  --color-orange-950: #081426;   /* Obsidian Night */
+
+  /* Brand orange aliases */
+  --color-brand-orange: #0284C7;
+  --color-brand-orange-hover: #0369A1;
+  --color-brand-orange-light: #BAE6FD;
+  --color-brand-orange-dark: #142A44;
+
+  --font-inter: var(--font-inter);
+}
+
+@variant dark (&:where(.dark, .dark *));
+
+:root {
+  /* Light Mode Palette */
+  --background: #F8FAFC;
+  --foreground: #081426;
+  --card-bg: #FFFFFF;
+  --card-border: #E2E8F0;
+
+  --primary-navy: #142A44;
+  --primary-dark: #081426;
+  --primary-accent: #4A74A7;
+  --primary-accent-hover: #3A608F;
+  --primary-ice: #DCEAF7;
+}
+
+.dark {
+  /* Farnegar Dark Blue Palette */
+  --background: #081426;
+  --foreground: #F0F6FC;
+  --card-bg: #142A44;
+  --card-border: #1E3B60;
+
+  --primary-navy: #142A44;
+  --primary-dark: #081426;
+  --primary-accent: #4A74A7;
+  --primary-accent-hover: #6A95CA;
+  --primary-ice: #DCEAF7;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow-x: hidden;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Custom scrollbar matching active theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #E2E8F0;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #081426;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #1E3B60;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4A74A7;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #4A74A7;
+}
+
+/* Smooth transitions */
+.transition-smooth {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ====================================================================
+   Electric Sky Blue & Cyan Glowing Button System (Button Style ភ្លឺៗ)
+   - Luminous high-contrast Electric Cyan/Sky gradient
+   - Glowing Aura Box-shadow
+   - Shimmer light reflection streak on hover
+   ==================================================================== */
+.btn-glow,
+.btn-primary-glow {
+  position: relative !important;
+  overflow: hidden !important;
+  background: linear-gradient(135deg, #00D2FF 0%, #0EA5E9 48%, #0284C7 100%) !important;
+  color: #FFFFFF !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  box-shadow: 0 0 20px rgba(0, 210, 255, 0.45), 0 4px 14px rgba(2, 132, 199, 0.35) !important;
+  text-shadow: 0 1px 2px rgba(0, 20, 50, 0.35);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.btn-glow:hover,
+.btn-primary-glow:hover {
+  background: linear-gradient(135deg, #38BDF8 0%, #00C6FF 45%, #0284C7 100%) !important;
+  border-color: rgba(255, 255, 255, 0.85) !important;
+  box-shadow: 0 0 32px rgba(0, 210, 255, 0.75), 0 0 50px rgba(14, 165, 233, 0.45), 0 6px 20px rgba(0, 0, 0, 0.3) !important;
+  transform: translateY(-1.5px) scale(1.015);
+}
+
+.btn-glow:active,
+.btn-primary-glow:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 0 14px rgba(0, 210, 255, 0.5) !important;
+}
+
+/* Shimmer Streak Reflection traversing across the button */
+.btn-glow::after,
+.btn-primary-glow::after {
+  content: '' !important;
+  position: absolute !important;
+  top: -60% !important;
+  left: -90% !important;
+  width: 45% !important;
+  height: 220% !important;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.65) 50%,
+    rgba(255, 255, 255, 0) 100%
+  ) !important;
+  transform: rotate(25deg) !important;
+  transition: all 0.75s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  pointer-events: none !important;
+}
+
+.btn-glow:hover::after,
+.btn-primary-glow:hover::after {
+  left: 140% !important;
+}
+
+/* Secondary Glow variant for softer glowing buttons */
+.btn-glow-subtle {
+  position: relative !important;
+  overflow: hidden !important;
+  background: #142A44 !important;
+  color: #DCEAF7 !important;
+  border: 1px solid #1E3B60 !important;
+  box-shadow: 0 0 15px rgba(0, 210, 255, 0.15) !important;
+  transition: all 0.25s ease !important;
+}
+
+.btn-glow-subtle:hover {
+  background: #1E3B60 !important;
+  color: #FFFFFF !important;
+  border-color: #00D2FF !important;
+  box-shadow: 0 0 22px rgba(0, 210, 255, 0.4) !important;
+  transform: translateY(-1px);
+}
+
+/* Custom Date Input & Calendar Icon Styling */
+input[type="date"] {
+  position: relative;
+  cursor: pointer;
+}
+
+.dark input[type="date"] {
+  color-scheme: dark;
+}
+
+/* Hide native finicky calendar picker icon so custom crisp SVG icon shows cleanly */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0 !important;
+  cursor: pointer !important;
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute !important;
+  right: 0 !important;
+  top: 0 !important;
+}
+
+
