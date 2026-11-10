@@ -100,7 +100,7 @@ export default function AIChatbot() {
   return (
     <>
       {/* Floating Trigger Button: Sleek & Compact so it NEVER blocks mobile inputs */}
-      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 pb-[env(safe-area-inset-bottom,0px)]">
+      <div className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 pb-[env(safe-area-inset-bottom,0px)] ${pathname.startsWith('/admin') ? 'max-sm:hidden' : ''}`}>
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="group relative flex items-center justify-center w-11 h-11 sm:w-auto sm:px-5 sm:py-3.5 rounded-full btn-glow text-white font-black text-sm shadow-xl hover:scale-105 active:scale-95 transition-all cursor-pointer"
